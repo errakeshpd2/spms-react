@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Menu, Dropdown, Container, Image } from 'semantic-ui-react';
+import { Menu, Container } from 'semantic-ui-react';
 
 import APP_PATH from '../../constants/paths';
 
@@ -11,7 +11,6 @@ const Header = ({ user }) => (
     <Menu fixed='top' inverted>
       <Container>
         <Menu.Item as='a' header>
-          {/* <Image size='mini' src='/logo.png' style={{ marginRight: '1.5em' }} /> */}
           SPMS
         </Menu.Item>
         <Menu.Item as='li'>

@@ -15,6 +15,9 @@ const api = {
   validate_token: () => axios.post('api/v1/validate_token', {})
     .then(res => Promise.resolve(res))
     .catch(err => Promise.reject(err)),
+  dashboard: (start_date) => axios.get('api/v1/dashboard', {params: { start_date }})
+    .then(res => Promise.resolve(res))
+    .catch(err => Promise.reject(err)),
 };
 
 
