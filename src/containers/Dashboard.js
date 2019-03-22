@@ -1,13 +1,15 @@
-import React from "react";
+import React from 'react'
+
 class Dashboard extends React.Component {
-  
   render() {
     return (
-      <div>
-        'Dashboard'
-      </div>
+    <div>
+    </div>
     );
   }
 }
 
 export default Dashboard
+
+
+
