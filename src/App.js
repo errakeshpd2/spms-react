@@ -20,7 +20,7 @@ class App extends Component {
       <div>
         {!isEmpty(user) && (<Header user={user} />)}
         <Container
-          style={{ width: '95%', marginTop: '4em', marginBottom: '7em' }}
+          style={{ width: '95%', marginTop: '7em', marginBottom: '7em' }}
         >
           <Switch>
             <Route path={APP_PATH.LOGIN} component={Login} />

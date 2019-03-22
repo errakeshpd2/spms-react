@@ -9,9 +9,9 @@ import {
 
 const Footer = ({ user }) => (
   <div>
-     <Segment inverted vertical style={{ margin: '5em 0em 0em', padding: '5em 0em' }}>
+     <Segment inverted vertical style={{ margin: '5em 0em 0em', padding: '5em 0em' }} color='teal'>
       <Container textAlign='center'>
-        <List horizontal inverted divided link size='small'>
+        <List horizontal inverted divided link size='small' color='teal'>
           <List.Item as='a' href='#'>
             Site Map
           </List.Item>
