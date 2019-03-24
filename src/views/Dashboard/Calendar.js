@@ -21,7 +21,7 @@ class Calendar extends React.Component {
       return {
         title: ticket.attributes.title,
         start: new Date(ticket.attributes.start_date),
-        end: new Date(ticket.attributes.end_date),
+        end: new Date(ticket.attributes.end_date || ticket.attributes.start_date),
       }
     });
   
