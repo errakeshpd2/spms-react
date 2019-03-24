@@ -1,0 +1,10 @@
+deploy_staging:
+ stage: deploy
+ script:
+   - git remote add heroku https://heroku:$HEROKU_DEV_KEY@git.heroku.com/spms-react.git
+   - git checkout staging
+   - git push heroku staging:master -f
+ environment:
+   name: staging
+ only:
+   - staging
