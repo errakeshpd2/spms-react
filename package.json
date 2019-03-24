@@ -17,9 +17,11 @@
     "recompose": "^0.30.0",
     "redux": "^4.0.1",
     "redux-actions": "^2.6.5",
+    "redux-form": "^5.4.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.86.0",
-    "store": "^2.0.12"
+    "store": "^2.0.12",
+    "validatorjs": "^3.15.1"
   },
   "scripts": {
     "start": "react-scripts start",

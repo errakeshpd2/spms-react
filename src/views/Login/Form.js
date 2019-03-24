@@ -37,17 +37,13 @@ const LoginForm = ({ error, onSubmit }) => (
               iconPosition='left'
               placeholder='Password'
               type='password'
-              name="password"
+              name='password'
             />
-
             <Button color='teal' fluid size='large'>
               Login
             </Button>
           </Segment>
         </Form>
-        <Message>
-          New to us? <a href='#'>Sign Up</a>
-        </Message>
       </Grid.Column>
     </Grid>
   </div>

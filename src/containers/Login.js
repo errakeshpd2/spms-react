@@ -39,7 +39,7 @@ class Login extends React.Component {
     const { user} = this.props;
     return (
       <div>
-        <LoginForm onSubmit={this.handleSubmit} error={user.error}/>;
+        <LoginForm onSubmit={this.handleSubmit} error={user.error}/>
       </div>
     );
   }

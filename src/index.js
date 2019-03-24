@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import './index.css';
 import 'semantic-ui-css/semantic.min.css'
 
 import App from './App';
