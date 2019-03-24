@@ -26,10 +26,13 @@ class Login extends React.Component {
       if (!accessToken) {
         throw Error('Unexpected error');
       }
-      localStore.set('jwt', accessToken);
-      signInUser(user).then(()=>{
-        history.push(APP_PATH.BASE);
-      })
+
+      Promise.resolve(localStore.set('jwt', accessToken))
+      .then(() => {
+        signInUser(user).then(()=>{
+          history.push(APP_PATH.BASE);
+        })
+      });
     })
     .catch(error => {
       saveOptions({ error: 'Invalid username/password'});
