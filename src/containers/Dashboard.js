@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
 
 import Calendar from '../views/Dashboard/Calendar.js'
 import api from '../helpers/api';

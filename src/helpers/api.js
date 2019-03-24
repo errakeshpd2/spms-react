@@ -21,6 +21,9 @@ const api = {
   updateProfile: (user) => axios.put(`api/v1/users/${user.id}`, {user})
     .then(res => Promise.resolve(res))
     .catch(err => Promise.reject(err)),
+  tickets: (user, page) => axios.get('api/v1/tickets', {params: { assigned_user_id: user.id, page: page }})
+    .then(res => Promise.resolve(res))
+    .catch(err => Promise.reject(err)),
 };
 
 
