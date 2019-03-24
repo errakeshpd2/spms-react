@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
 
 import Calendar from '../views/Dashboard/Calendar.js'
 import api from '../helpers/api';
@@ -9,13 +8,7 @@ import { addTicketActivityLogs } from '../data/ticket_activity_logs/actions';
 
 class Dashboard extends React.Component {
   componentDidMount() {
-    const startOfMonth = moment().startOf('month').format('YYYY-MM-DD hh:mm');
-    this.fetchDashboardApi(startOfMonth);
-  }
-
-  handleNavigate = (date, view, action) => {
-    const startOfMonth = moment(date).startOf('month').format('YYYY-MM-DD hh:mm');
-    this.fetchDashboardApi(startOfMonth);
+    this.fetchDashboardApi();
   }
 
   handleSlotSelection = (slotInfo) => {
@@ -43,7 +36,6 @@ class Dashboard extends React.Component {
         <Calendar
           tickets={tickets}
           ticket_activity_logs={ticket_activity_logs}
-          handleNavigate={this.handleNavigate}
           handleEventSelection={this.handleEventSelection}
           handleSlotSelection={this.handleSlotSelection}
         />
