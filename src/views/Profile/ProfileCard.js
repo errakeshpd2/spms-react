@@ -7,6 +7,8 @@ class ProfileCard extends React.Component {
   render() {
     const { user } = this.props;
     const name = `${user.data.attributes.first_name} ${user.data.attributes.last_name}`
+    const projectCount = user.data.attributes.projects.data.length;
+
     return (
       <div>
         <Card>
@@ -20,7 +22,7 @@ class ProfileCard extends React.Component {
           </Card.Content>
           <Card.Content extra>
             <Icon name='user' />
-            2 Projects
+            {projectCount} Projects
           </Card.Content>
         </Card>
       </div>
