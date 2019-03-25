@@ -5,7 +5,6 @@ import Calendar from '../views/Dashboard/Calendar.js'
 import api from '../helpers/api';
 import { addTickets } from '../data/tickets/actions';
 import { addTicketActivityLogs } from '../data/ticket_activity_logs/actions';
-
 class Dashboard extends React.Component {
   componentDidMount() {
     this.fetchDashboardApi();

@@ -1,12 +1,37 @@
 import axios from 'axios';
 import localStore from 'store';
+import { startSpinner, stopSpinner } from '../data/spinner/actions';
+import store from '../store';
 
+const { dispatch } = store;
 const token = localStore.get('jwt');
 
 axios.defaults.xsrfCookieName = 'CSRF-TOKEN';
 axios.defaults.xsrfHeaderName = 'X-CSRF-Token';
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 axios.defaults.headers.common = {'Authorization': `bearer ${token}`}
+
+axios.interceptors.request.use(
+  config => {
+    dispatch(startSpinner());
+    return config;
+  },
+  error => {
+    dispatch(stopSpinner());
+    return Promise.reject(error);
+  }
+);
+
+axios.interceptors.response.use(
+  response => {
+    dispatch(stopSpinner());
+    return response;
+  },
+  error => {
+    dispatch(stopSpinner());
+    return Promise.reject(error);
+  }
+);
 
 const api = {
   login: (email, password) => axios.post('api/v1/login', {email, password, password_confirmation	: password })
@@ -26,5 +51,4 @@ const api = {
     .catch(err => Promise.reject(err)),
 };
 
-
-export default api;
+export default api
