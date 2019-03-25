@@ -9,6 +9,7 @@ import Logout from './containers/Logout';
 import Dashboard from './containers/Dashboard';
 import Header from './views/Shared/Header';
 import Footer from './views/Shared/Footer';
+import Spinner from './views/Shared/Spinner';
 import Profile from './containers/Profile';
 import Tickets from './containers/Tickets';
 
@@ -28,6 +29,7 @@ class App extends Component {
             <Route path={APP_PATH.TICKETS} component={requireAuth(Tickets)} />
           </Switch>
         </Container>
+        <Spinner />
         <Footer />
       </div>
     );
