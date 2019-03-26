@@ -51,12 +51,13 @@ class Profile extends React.Component {
     };
 
     const handleInputChange = event => {
-      const {updateProfile } = this.props;
+      const { updateProfile } = this.props;
       const target = event.target;
       const value = target.type === 'checkbox' ? target.checked : target.value;
       const name = target.name;
       updateProfile(name, value);
     };
+
     return (
       <div>
         { user.data && (
