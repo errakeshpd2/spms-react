@@ -8,6 +8,14 @@ const reducer = (state = initialState, action) => {
       return action.payload;
     case actionType.CLEAR_TICKETS:
       return [];
+    case actionType.PUSH_TO_TICKETS:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          ...action.payload
+        }
+      }
     default:
       return state;
   }
