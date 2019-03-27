@@ -5,10 +5,10 @@ import { Button, Message, Confirm } from 'semantic-ui-react';
 import Validator from 'validatorjs';
 
 import TicketList from '../views/Tickets/TicketList.js';
-import TicketNewForm from '../views/Tickets/TicketNewForm';
+import TicketForm from '../views/Tickets/TicketForm';
 
 import api from '../helpers/api';
-import { addTickets, pushToTickets, removeFromTickets } from '../data/tickets/actions';
+import { addTickets, pushToTickets, removeFromTickets, refreshTickets } from '../data/tickets/actions';
 import { saveTicketOption, addTicket, updateTicket} from '../data/ticket/actions';
 import { customValidationMessages } from '../helpers/auth';
 
@@ -32,7 +32,7 @@ class Tickets extends React.Component {
 
     switch (action) {
       case 'Edit':
-        saveTicketOption({ isEditModalOpen: true });
+        saveTicketOption({ isModalOpen: true });
         break;
       case 'Delete':
         saveTicketOption({ isDeleteModalOpen: true });
@@ -57,13 +57,13 @@ class Tickets extends React.Component {
     }
 
     addTicket(ticket).then(()=>{
-      saveTicketOption({isNewModalOpen: true});
+      saveTicketOption({isModalOpen: true});
     })    
   }
 
   onCloseHandler = () => {
     const { saveTicketOption } = this.props;
-    saveTicketOption({isNewModalOpen: false})
+    saveTicketOption({isModalOpen: false})
   }
 
   onChangeHandler = event => {
@@ -104,6 +104,40 @@ class Tickets extends React.Component {
       });
   }
 
+  saveTicket = (validation) => {
+    const { saveTicketOption, pushToTickets, ticket } = this.props;
+    const ticketInput = {
+      ...ticket.data.attributes
+    }
+    api.createTicket(ticketInput)
+      .then(({data}) => {
+        pushToTickets(data.ticket).then(()=>{
+          saveTicketOption({ ...validation.errors, flashMessage: data.status, error: null, isModalOpen: false});
+        })
+      })
+      .catch(error => {
+        saveTicketOption({ error: error.response.data.errors, ...validation.errors, flashMessage: null});
+      });
+  }
+
+  updateTicket = (validation) => {
+    const { saveTicketOption, refreshTickets, ticket } = this.props;
+    const ticketInput = {
+      ...ticket.data.attributes
+    }
+
+    api.updateTicket(ticketInput, ticket.data.id)
+      .then(({data}) => {
+        debugger;
+        refreshTickets(data.ticket).then(()=>{
+          saveTicketOption({ ...validation.errors, flashMessage: data.status, error: null, isModalOpen: false});
+        })
+      })
+      .catch(error => {
+        saveTicketOption({ error: error.response.data.errors, ...validation.errors, flashMessage: null});
+      });
+  }
+
   render() {
     const { tickets, ticket, user } = this.props;
     
@@ -121,7 +155,7 @@ class Tickets extends React.Component {
   
     const submitForm = (e) => {
       e.preventDefault();
-      const { ticket, saveTicketOption, pushToTickets } = this.props;
+      const { ticket, saveTicketOption } = this.props;
       const validation = new Validator(
         ticket, 
         validationRules,
@@ -132,18 +166,11 @@ class Tickets extends React.Component {
         saveTicketOption({ ...validation.errors});
         return false;
       } else {
-        const ticketInput = {
-          ...ticket.data.attributes
-        }
-        api.createTicket(ticketInput)
-        .then(({data}) => {
-          pushToTickets(data.ticket).then(()=>{
-            saveTicketOption({ ...validation.errors, flashMessage: data.status, error: null, isNewModalOpen: false});
-          })
-        })
-        .catch(error => {
-          saveTicketOption({ error: error.response.data.errors, ...validation.errors, flashMessage: null});
-        });
+        if(isEmpty(ticket.data.id)){
+          this.saveTicket(validation)
+        } else {
+          this.updateTicket(validation)
+        } 
       }
     };
     return (
@@ -173,10 +200,10 @@ class Tickets extends React.Component {
             actionSelectionHandler={this.onSelectTicket}
           />
         )}
-        {ticket && ticket.isNewModalOpen && (
+        {ticket && ticket.isModalOpen && (
           <div>
-            <TicketNewForm
-              isNewModalOpen={ticket.isNewModalOpen}
+            <TicketForm
+              isModalOpen={ticket.isModalOpen}
               ticket={ticket}
               user={user}
               submitForm={submitForm}
@@ -213,6 +240,10 @@ const mapDispatchToProps = dispatch => () => ({
   },
   removeFromTickets: (ticketId) => {
     dispatch(removeFromTickets(ticketId))
+    return Promise.resolve();
+  },
+  refreshTickets: (ticket) => {
+    dispatch(refreshTickets(ticket))
     return Promise.resolve();
   }
 });

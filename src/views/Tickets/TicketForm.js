@@ -28,7 +28,7 @@ class TicketForm extends Component {
           }
         }
       },
-      isNewModalOpen,
+      isModalOpen,
       onCloseHandler,
       onChangeHandler,
       onSelectHandler,
@@ -48,7 +48,7 @@ class TicketForm extends Component {
 
     return (
       <Modal
-        open={isNewModalOpen}
+        open={isModalOpen}
         closeIcon
         onClose={onCloseHandler}
         closeOnEscape={false}

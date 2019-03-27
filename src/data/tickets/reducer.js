@@ -14,6 +14,10 @@ const reducer = (state = initialState, action) => {
     case actionType.REMOVE_FROM_TICKETS:
       const newState = state.data.filter( val => val.id !== action.payload );
       return{ data: [ ...newState ]}
+    case actionType.REFRESH_TICKETS:
+      const newEditedState = state.data.filter( val => val.id !== action.payload.data.id );
+      newEditedState.push(action.payload.data)
+      return{ data: [ ...newEditedState ]}
     default:
       return state;
   }
