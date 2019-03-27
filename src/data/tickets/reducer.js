@@ -9,13 +9,11 @@ const reducer = (state = initialState, action) => {
     case actionType.CLEAR_TICKETS:
       return [];
     case actionType.PUSH_TO_TICKETS:
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          ...action.payload
-        }
-      }
+      state.data.push(action.payload.data)
+      return state;
+    case actionType.REMOVE_FROM_TICKETS:
+      const newState = state.data.filter( val => val.id !== action.payload );
+      return{ data: [ ...newState ]}
     default:
       return state;
   }

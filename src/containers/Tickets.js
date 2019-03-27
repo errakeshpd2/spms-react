@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { isEmpty } from 'loadsh'
-import { Button, Message } from 'semantic-ui-react';
+import { Button, Message, Confirm } from 'semantic-ui-react';
 import Validator from 'validatorjs';
 
 import TicketList from '../views/Tickets/TicketList.js';
 import TicketNewForm from '../views/Tickets/TicketNewForm';
 
 import api from '../helpers/api';
-import { addTickets, pushToTickets } from '../data/tickets/actions';
+import { addTickets, pushToTickets, removeFromTickets } from '../data/tickets/actions';
 import { saveTicketOption, addTicket, updateTicket} from '../data/ticket/actions';
 import { customValidationMessages } from '../helpers/auth';
 
@@ -27,10 +27,15 @@ class Tickets extends React.Component {
   }
 
   onSelectTicket = (action, ticket) => {
+    const { addTicket, saveTicketOption } = this.props;
+    addTicket({ data: { ...ticket }});
+
     switch (action) {
       case 'Edit':
+        saveTicketOption({ isEditModalOpen: true });
         break;
       case 'Delete':
+        saveTicketOption({ isDeleteModalOpen: true });
         break;
       default:
     }
@@ -78,6 +83,26 @@ class Tickets extends React.Component {
     const { updateTicket } = this.props;
     updateTicket(name, date);      
   };
+
+  handleDeleteCancel = () => {
+    const { saveTicketOption } = this.props;
+    saveTicketOption({ data: {}, isDeleteModalOpen: false })
+  }
+
+  handleDeleteConfirm = () => {
+    const { saveTicketOption, removeFromTickets, ticket } = this.props;
+
+    api.deleteTicket(ticket)
+      .then(({data}) => {
+        removeFromTickets(ticket.data.id).then(()=>{
+          saveTicketOption({ flashMessage: data.status, error: null, isDeleteModalOpen: false});
+        })
+      })
+      .catch(error => {
+                  debugger;
+        saveTicketOption({ error: error.response.data.error, flashMessage: null, isDeleteModalOpen: false});
+      });
+  }
 
   render() {
     const { tickets, ticket, user } = this.props;
@@ -128,13 +153,20 @@ class Tickets extends React.Component {
         </Button>
         <br />
         <br />
-         {ticket && ticket.flashMessage && (
-            <Message
-              onDismiss={this.handleDismiss}
-              content={ticket.flashMessage}
-              positive
-            />
-          )}
+        {ticket && ticket.flashMessage && (
+          <Message
+            onDismiss={this.handleDismiss}
+            content={ticket.flashMessage}
+            positive
+          />
+        )}
+        {ticket && ticket.error && (
+          <Message
+            onDismiss={this.handleDismiss}
+            content={ticket.error}
+            negative
+          />
+        )}
         {!isEmpty(tickets) && (
           <TicketList 
             tickets={tickets} 
@@ -155,6 +187,13 @@ class Tickets extends React.Component {
             />
           </div>
         )}
+        {ticket && ticket.isDeleteModalOpen && (
+          <Confirm
+            open={ticket.isDeleteModalOpen}
+            onCancel={this.handleDeleteCancel}
+            onConfirm={this.handleDeleteConfirm}
+          />
+        )}
       </div>
     );
   }
@@ -170,6 +209,10 @@ const mapDispatchToProps = dispatch => () => ({
   },
   pushToTickets: (ticket) => {
     dispatch(pushToTickets(ticket))
+    return Promise.resolve();
+  },
+  removeFromTickets: (ticketId) => {
+    dispatch(removeFromTickets(ticketId))
     return Promise.resolve();
   }
 });

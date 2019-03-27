@@ -52,6 +52,9 @@ const api = {
   createTicket: (ticket) => axios.post(`api/v1/tickets/`, {ticket})
     .then(res => Promise.resolve(res))
     .catch(err => Promise.reject(err)),
+  deleteTicket: (ticket) => axios.delete(`api/v1/tickets/${ticket.data.id}`)
+    .then(res => Promise.resolve(res))
+    .catch(err => Promise.reject(err))
 };
 
 export default api
