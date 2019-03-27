@@ -21,7 +21,7 @@ const ProfileForm = (props) => {
             )}
             <Form>
               <Form.Group widths="equal">
-                <Form.Field required >
+                <Form.Field required error={errors && !isEmpty(errors['data.attributes.first_name'])}>
                   <label>First Name</label>
                   <Input
                     name='first_name'

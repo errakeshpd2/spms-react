@@ -10,6 +10,7 @@ import { Table, Dropdown } from 'semantic-ui-react';
   const { 
     attributes: {
       title,
+      ticket_no,
       id,
       start_date,
       end_date,
@@ -24,7 +25,7 @@ import { Table, Dropdown } from 'semantic-ui-react';
 
   return (
     <Table.Row key={id}>
-      <Table.Cell>{id}</Table.Cell>
+      <Table.Cell>{ticket_no}</Table.Cell>
       <Table.Cell>{title}</Table.Cell>
       <Table.Cell>{project && project.data.attributes.name}</Table.Cell>
       <Table.Cell>{start_date}</Table.Cell>
