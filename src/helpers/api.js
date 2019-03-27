@@ -61,6 +61,15 @@ const api = {
   ticketActivityLogs: (user, page) => axios.get('api/v1/ticket_activity_logs', {params: { user_id: user.id }})
     .then(res => Promise.resolve(res))
     .catch(err => Promise.reject(err)),
+  createTicketActivityLog: (ticket_activity_log) => axios.post(`api/v1/ticket_activity_logs/`, {ticket_activity_log})
+    .then(res => Promise.resolve(res))
+    .catch(err => Promise.reject(err)),
+  updateTicketActivityLog: (ticket_activity_log, ticketActivityId) => axios.put(`api/v1/ticket_activity_logs/${ticketActivityId}`, {ticket_activity_log})
+    .then(res => Promise.resolve(res))
+    .catch(err => Promise.reject(err)),
+  deleteTicketActivityLog: (ticket_activity_log) => axios.delete(`api/v1/ticket_activity_logs/${ticket_activity_log.data.id}`)
+    .then(res => Promise.resolve(res))
+    .catch(err => Promise.reject(err)),
 };
 
 export default api
