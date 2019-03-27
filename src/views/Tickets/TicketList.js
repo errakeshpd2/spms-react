@@ -13,6 +13,8 @@ class TicketList extends React.Component {
         <Table.HeaderCell>Ticket ID</Table.HeaderCell>
         <Table.HeaderCell>Title</Table.HeaderCell>
         <Table.HeaderCell>Project</Table.HeaderCell>
+        <Table.HeaderCell>Category</Table.HeaderCell>
+        <Table.HeaderCell>Status</Table.HeaderCell>
         <Table.HeaderCell>Start Date</Table.HeaderCell>
         <Table.HeaderCell>End Date</Table.HeaderCell>
         <Table.HeaderCell />

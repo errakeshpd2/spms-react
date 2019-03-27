@@ -47,6 +47,7 @@ class Tickets extends React.Component {
       data: {
         attributes: {
           title: '',
+          maximum_permitted_time: '',
           assigned_user_id: user.data.id,
           created_user_id: user.data.id,
           created_user_type: 'User'

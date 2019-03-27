@@ -1,4 +1,5 @@
 import * as actionType from './actionTypes';
+import { find } from 'loadsh'
 
 const initialState = [];
 
@@ -15,9 +16,9 @@ const reducer = (state = initialState, action) => {
       const newState = state.data.filter( val => val.id !== action.payload );
       return{ data: [ ...newState ]}
     case actionType.REFRESH_TICKETS:
-      const newEditedState = state.data.filter( val => val.id !== action.payload.data.id );
-      newEditedState.push(action.payload.data)
-      return{ data: [ ...newEditedState ]}
+      let index = state.data.indexOf(find(state.data, ['id', action.payload.data.id]));
+      state.data.splice(index, 1, action.payload.data);
+      return state;
     default:
       return state;
   }
