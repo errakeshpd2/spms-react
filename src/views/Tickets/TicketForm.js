@@ -68,7 +68,7 @@ class TicketForm extends Component {
             <Form>
               <Header size="small" color="blue" />
               <Form.Group>
-                <Form.Field required width={4}>
+                <Form.Field required width={4} error={ticket.errors && !isEmpty(ticket.errors['data.attributes.ticket_no'])}>
                   <label>Ticket #</label>
                   <Input
                     name='ticket_no'
@@ -77,7 +77,7 @@ class TicketForm extends Component {
                   />
                   {ticket.errors && ticket.errors['data.attributes.ticket_no'] && <span style={{color: 'red'}}>{ticket.errors['data.attributes.ticket_no']}</span>}
                 </Form.Field>
-                <Form.Field required width={12}>
+                <Form.Field required width={12} error={ticket.errors && !isEmpty(ticket.errors['data.attributes.title'])}>
                   <label>Title</label>
                   <Input
                     name='title'
@@ -98,7 +98,7 @@ class TicketForm extends Component {
                 </Form.Field>
               </Form.Group>
               <Form.Group widths="equal">
-                <Form.Field>
+                <Form.Field required error={ticket.errors && !isEmpty(ticket.errors['data.attributes.project_id'])}>
                   <label>Project</label>
                   <Select
                     placeholder="Select a project"
@@ -132,7 +132,7 @@ class TicketForm extends Component {
                 </Form.Field>
               </Form.Group>
               <Form.Group widths="equal">
-                <Form.Field >
+                <Form.Field width={4}>
                   <label>Maximum Permitted Time</label>
                   <Input
                     name='maximum_permitted_time'
@@ -141,7 +141,7 @@ class TicketForm extends Component {
                   />
                   {ticket.errors && ticket.errors['data.attributes.maximum_permitted_time'] && <span style={{color: 'red'}}>{ticket.errors['data.attributes.maximum_permitted_time']}</span>}
                 </Form.Field>
-                <Form.Field required >
+                <Form.Field required width={6} error={ticket.errors && !isEmpty(ticket.errors['data.attributes.start_date'])}>
                   <label>Start Date:</label>
                   <DatePicker
                     style={{ padding: '0' }}
@@ -149,10 +149,10 @@ class TicketForm extends Component {
                     selected={ticket.data.attributes.start_date}
                     onChange={(date) => onDateChangeHandler(date, 'start_date')}
                     dateFormat='dd/MM/YYYY'
-                  />
+                  /><br/>
                   {ticket.errors && ticket.errors['data.attributes.start_date'] && <span style={{color: 'red'}}>{ticket.errors['data.attributes.start_date']}</span>}
                 </Form.Field>
-                <Form.Field>
+                <Form.Field width={6}>
                   <label>End Date:</label>
                   <DatePicker
                     style={{ padding: '0' }}

@@ -10,6 +10,7 @@ import TicketNewForm from '../views/Tickets/TicketNewForm';
 import api from '../helpers/api';
 import { addTickets, pushToTickets } from '../data/tickets/actions';
 import { saveTicketOption, addTicket, updateTicket} from '../data/ticket/actions';
+import { customValidationMessages } from '../helpers/auth';
 
 class Tickets extends React.Component {
   componentDidMount() {
@@ -99,9 +100,7 @@ class Tickets extends React.Component {
       const validation = new Validator(
         ticket, 
         validationRules,
-        { required: 'required',
-          numeric: 'must be a number' 
-        }
+        customValidationMessages
       );
 
       if (validation.fails()) {
