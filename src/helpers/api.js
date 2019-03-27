@@ -46,7 +46,7 @@ const api = {
   updateProfile: (user) => axios.put(`api/v1/users/${user.id}`, {user})
     .then(res => Promise.resolve(res))
     .catch(err => Promise.reject(err)),
-  tickets: (user, page) => axios.get('api/v1/tickets', {params: { assigned_user_id: user.id, page: page }})
+  tickets: (user, page) => axios.get('api/v1/tickets', {params: { assigned_user_id: user.id }})
     .then(res => Promise.resolve(res))
     .catch(err => Promise.reject(err)),
   createTicket: (ticket) => axios.post(`api/v1/tickets/`, {ticket})
@@ -57,7 +57,10 @@ const api = {
     .catch(err => Promise.reject(err)),
   deleteTicket: (ticket) => axios.delete(`api/v1/tickets/${ticket.data.id}`)
     .then(res => Promise.resolve(res))
-    .catch(err => Promise.reject(err))
+    .catch(err => Promise.reject(err)),
+  ticketActivityLogs: (user, page) => axios.get('api/v1/ticket_activity_logs', {params: { user_id: user.id }})
+    .then(res => Promise.resolve(res))
+    .catch(err => Promise.reject(err)),
 };
 
 export default api

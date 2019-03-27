@@ -6,4 +6,5 @@ export default {
   LOGOUT: `${base}logout`,
   PROFILE: `${base}profile`,
   TICKETS: `${base}tickets`,
+  ACTIVITY_LOGS: `${base}activity_logs`
 };
