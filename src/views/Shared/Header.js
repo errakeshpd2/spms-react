@@ -26,6 +26,9 @@ class Header extends Component {
                   <Menu.Item as='li'>
                     <Link to={APP_PATH.TICKETS}>Tickets</Link>
                   </Menu.Item>
+                  <Menu.Item as='li'>
+                    <Link to={APP_PATH.ACTIVITY_LOGS}>Activity Logs</Link>
+                  </Menu.Item>
                   <Menu.Menu position="right">
                     <Menu.Item>
                       <Link to={APP_PATH.PROFILE}>Profile</Link>

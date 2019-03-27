@@ -12,6 +12,7 @@ import Footer from './views/Shared/Footer';
 import Spinner from './views/Shared/Spinner';
 import Profile from './containers/Profile';
 import Tickets from './containers/Tickets';
+import TicketActivityLogs from './containers/TicketActivityLogs';
 
 class App extends Component {
   render() {
@@ -27,6 +28,7 @@ class App extends Component {
             <Route path={APP_PATH.BASE} component={requireAuth(Dashboard)} exact/>
             <Route path={APP_PATH.PROFILE} component={requireAuth(Profile)} />
             <Route path={APP_PATH.TICKETS} component={requireAuth(Tickets)} />
+            <Route path={APP_PATH.ACTIVITY_LOGS} component={requireAuth(TicketActivityLogs)} />
           </Switch>
         </Container>
         <Spinner />

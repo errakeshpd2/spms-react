@@ -129,13 +129,12 @@ class Tickets extends React.Component {
 
     api.updateTicket(ticketInput, ticket.data.id)
       .then(({data}) => {
-        debugger;
         refreshTickets(data.ticket).then(()=>{
-          saveTicketOption({ ...validation.errors, flashMessage: data.status, error: null, isModalOpen: false});
+          saveTicketOption({ data: {}, ...validation.errors, flashMessage: data.status, error: null, isModalOpen: false});
         })
       })
       .catch(error => {
-        saveTicketOption({ error: error.response.data.errors, ...validation.errors, flashMessage: null});
+        saveTicketOption({ data: {}, error: error.response.data.errors, ...validation.errors, flashMessage: null});
       });
   }
 
