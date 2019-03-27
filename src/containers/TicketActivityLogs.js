@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { isEmpty } from 'loadsh'
-import { Button, Message } from 'semantic-ui-react';
+import { Button, Message, Confirm } from 'semantic-ui-react';
 import Validator from 'validatorjs';
 
 import TicketActivityList from '../views/TicketActivityLogs/TicketActivityList.js';
@@ -103,9 +103,7 @@ class TicketActivityLogs extends React.Component {
     }
     api.createTicketActivityLog(ticketActivityInput)
       .then(({data}) => {
-        debugger;
         pushToTicketActivityLogs(data.ticket_activity_log).then(()=>{
-          debugger;
           saveTicketActivityLogOption({ ...validation.errors, flashMessage: data.status, error: null, isModalOpen: false});
         })
       })
@@ -128,6 +126,25 @@ class TicketActivityLogs extends React.Component {
       })
       .catch(error => {
         saveTicketActivityLogOption({ data: {}, error: error.response.data.errors, ...validation.errors, flashMessage: null});
+      });
+  }
+
+  handleDeleteCancel = () => {
+    const { saveTicketActivityLogOption } = this.props;
+    saveTicketActivityLogOption({ data: {}, isDeleteModalOpen: false })
+  }
+
+  handleDeleteConfirm = () => {
+    const { saveTicketActivityLogOption, removeFromTicketActivityLogs, ticket_activity_log } = this.props;
+
+    api.deleteTicketActivityLog(ticket_activity_log)
+      .then(({data}) => {
+        removeFromTicketActivityLogs(ticket_activity_log.data.id).then(()=>{
+          saveTicketActivityLogOption({ flashMessage: data.status, error: null, isDeleteModalOpen: false});
+        })
+      })
+      .catch(error => {
+        saveTicketActivityLogOption({ error: error.response.data.error, flashMessage: null, isDeleteModalOpen: false});
       });
   }
 
@@ -203,6 +220,13 @@ class TicketActivityLogs extends React.Component {
           <TicketActivityList 
             ticket_activity_logs={ticket_activity_logs} 
             actionSelectionHandler={this.onSelectTicketActivityLog}
+          />
+        )}
+        {ticket_activity_log && ticket_activity_log.isDeleteModalOpen && (
+          <Confirm
+            open={ticket_activity_log.isDeleteModalOpen}
+            onCancel={this.handleDeleteCancel}
+            onConfirm={this.handleDeleteConfirm}
           />
         )}
       </div>

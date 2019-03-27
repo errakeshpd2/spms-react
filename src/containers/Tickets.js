@@ -100,7 +100,6 @@ class Tickets extends React.Component {
         })
       })
       .catch(error => {
-                  debugger;
         saveTicketOption({ error: error.response.data.error, flashMessage: null, isDeleteModalOpen: false});
       });
   }

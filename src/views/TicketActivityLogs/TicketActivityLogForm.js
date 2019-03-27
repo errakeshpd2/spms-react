@@ -13,9 +13,6 @@ import {
 } from 'semantic-ui-react';
 import 'react-datepicker/dist/react-datepicker.css';
 
-
-import { TICKET_STATUS } from '../../constants';
-
 class TicketActivityLogForm extends Component {
   render() {
     const {
