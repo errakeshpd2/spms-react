@@ -16,7 +16,6 @@ import { Table, Dropdown } from 'semantic-ui-react';
       status,
       ticket_no
     }
-
   } = ticket_activity_log;
 
   const handleActionChange = (e, { name, value }) => {

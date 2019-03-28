@@ -54,11 +54,11 @@ class TicketForm extends Component {
         closeOnEscape={false}
         closeOnRootNodeClick={false}
       >
-        <Modal.Header>
+        <Modal.Header style={{ color: 'white', background: 'teal'}}>
           {!ticket.id && 'Create New Ticket'}
           {ticket.id && 'Edit Ticket'}
         </Modal.Header>
-        <Modal.Content image scrolling>
+        <Modal.Content image>
           <Modal.Description>
             {ticket.error && (
               <Message negative>
@@ -166,12 +166,11 @@ class TicketForm extends Component {
             </Form>
           </Modal.Description>
         </Modal.Content>
-        <Modal.Actions>
-          <Button color="green" onClick={submitForm} inverted>
+        <Modal.Actions style={{ color: 'white', background: 'teal'}}>
+          <Button color="green" onClick={submitForm}>
             <Icon name="checkmark" /> Save
           </Button>
-
-          <Button onClick={onCloseHandler}>Cancel</Button>
+          <Button color="red" onClick={onCloseHandler}>Cancel</Button>
         </Modal.Actions>
       </Modal>
     );

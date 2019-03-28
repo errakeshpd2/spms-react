@@ -26,6 +26,7 @@ class App extends Component {
             <Route path={APP_PATH.LOGIN} component={Login} />
             <Route path={APP_PATH.LOGOUT} component={Logout} />
             <Route path={APP_PATH.BASE} component={requireAuth(Dashboard)} exact/>
+            <Route path={APP_PATH.DASHBOARD} component={requireAuth(Dashboard)}/>
             <Route path={APP_PATH.PROFILE} component={requireAuth(Profile)} />
             <Route path={APP_PATH.TICKETS} component={requireAuth(Tickets)} />
             <Route path={APP_PATH.ACTIVITY_LOGS} component={requireAuth(TicketActivityLogs)} />

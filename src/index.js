@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import 'semantic-ui-css/semantic.min.css'
+import 'semantic-ui-css/semantic.min.css';
+import './assets/css/semantic-ui-fix.css';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
