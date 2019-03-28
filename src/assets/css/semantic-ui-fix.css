@@ -1,0 +1,3 @@
+.ui.modal > .content > .description {
+  flex: 1 0 !important;
+}

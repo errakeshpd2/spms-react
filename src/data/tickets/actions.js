@@ -3,5 +3,7 @@ import * as actionType from './actionTypes';
 
 const addTickets = createAction(actionType.ADD_TICKETS);
 const clearTickets = createAction(actionType.CLEAR_TICKETS);
-
-export { addTickets, clearTickets };
+const pushToTickets = createAction(actionType.PUSH_TO_TICKETS)
+const removeFromTickets = createAction(actionType.REMOVE_FROM_TICKETS)
+const refreshTickets = createAction(actionType.REFRESH_TICKETS)
+export { addTickets, clearTickets, pushToTickets, removeFromTickets, refreshTickets };

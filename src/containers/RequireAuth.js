@@ -53,7 +53,6 @@ const requireAuth = ComposedComponent => {
       }
     }
 
-
     render() {
       return <ComposedComponent {...this.props} />;
     }

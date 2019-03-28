@@ -7,6 +7,7 @@ import ProfileCard from '../views/Profile/ProfileCard.js';
 import ProfileForm from '../views/Profile/ProfileForm.js'
 import { updateUser, saveOptions } from '../data/user/actions';
 import api from '../helpers/api';
+import { customValidationMessages } from '../helpers/auth';
 
 class Profile extends React.Component {
   render() {
@@ -26,7 +27,7 @@ class Profile extends React.Component {
     const submitForm = (e) => {
       e.preventDefault();
       const { user } = this.props;
-      const validation = new Validator(user, validationRules);
+      const validation = new Validator(user, validationRules, customValidationMessages);
 
       if (validation.fails()) {
         saveOptions({ ...validation.errors});
@@ -51,12 +52,13 @@ class Profile extends React.Component {
     };
 
     const handleInputChange = event => {
-      const {updateProfile } = this.props;
+      const { updateProfile } = this.props;
       const target = event.target;
       const value = target.type === 'checkbox' ? target.checked : target.value;
       const name = target.name;
       updateProfile(name, value);
     };
+
     return (
       <div>
         { user.data && (
