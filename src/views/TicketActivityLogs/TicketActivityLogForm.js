@@ -44,11 +44,11 @@ class TicketActivityLogForm extends Component {
         closeOnEscape={false}
         closeOnRootNodeClick={false}
       >
-        <Modal.Header>
-          {!ticket_activity_log.id && 'Create New Ticket'}
-          {ticket_activity_log.id && 'Edit Ticket'}
+        <Modal.Header inverted style={{ color: 'white', background: 'teal'}}>
+          {!ticket_activity_log.id && 'Create New Activity'}
+          {ticket_activity_log.id && 'Edit Activity'}
         </Modal.Header>
-        <Modal.Content image scrolling>
+        <Modal.Content image>
           <Modal.Description>
             {ticket_activity_log.error && (
               <Message negative>
@@ -103,12 +103,11 @@ class TicketActivityLogForm extends Component {
             </Form>
           </Modal.Description>
         </Modal.Content>
-        <Modal.Actions>
-          <Button color="green" onClick={submitForm} inverted>
+        <Modal.Actions style={{ color: 'white', background: 'teal'}}>
+          <Button color="green" onClick={submitForm}>
             <Icon name="checkmark" /> Save
           </Button>
-
-          <Button onClick={onCloseHandler}>Cancel</Button>
+          <Button color="red" onClick={onCloseHandler}>Cancel</Button>
         </Modal.Actions>
       </Modal>
     );
