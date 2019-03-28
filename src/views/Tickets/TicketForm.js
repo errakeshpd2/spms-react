@@ -54,7 +54,7 @@ class TicketForm extends Component {
         closeOnEscape={false}
         closeOnRootNodeClick={false}
       >
-        <Modal.Header style={{ color: 'white', background: 'teal'}}>
+        <Modal.Header style={{ color: 'white', background: '#00b5ad'}}>
           {!ticket.id && 'Create New Ticket'}
           {ticket.id && 'Edit Ticket'}
         </Modal.Header>
@@ -166,7 +166,7 @@ class TicketForm extends Component {
             </Form>
           </Modal.Description>
         </Modal.Content>
-        <Modal.Actions style={{ color: 'white', background: 'teal'}}>
+        <Modal.Actions style={{ color: 'white', background: '#00b5ad'}}>
           <Button color="green" onClick={submitForm}>
             <Icon name="checkmark" /> Save
           </Button>

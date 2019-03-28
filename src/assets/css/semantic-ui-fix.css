@@ -1,3 +1,6 @@
 .ui.modal > .content > .description {
   flex: 1 0 !important;
 }
+.ui.card>.content>.header, .ui.cards>.card>.content>.header {
+  color: white !important;
+}
