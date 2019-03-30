@@ -11,7 +11,7 @@ import { addTickets } from '../data/tickets/actions';
 import api from '../helpers/api';
 import { addTicketActivityLogs, pushToTicketActivityLogs, removeFromTicketActivityLogs, refreshTicketActivityLogs } from '../data/ticket_activity_logs/actions';
 import { saveTicketActivityLogOption, addTicketActivityLog, updateTicketActivityLog} from '../data/ticket_activity_log/actions';
-import { customValidationMessages } from '../helpers/auth';
+import { customValidationMessages, activityLogValidationRules } from '../helpers/auth';
 
 class TicketActivityLogs extends React.Component {
   componentDidMount() {
@@ -150,23 +150,13 @@ class TicketActivityLogs extends React.Component {
 
   render() {
     const { ticket_activity_logs, ticket_activity_log, tickets} = this.props;
-    const validationRules = {
-      data: {
-        attributes: {
-          activity: 'required',
-          ticket_id: 'required',
-          log_date: 'required',
-          log_time: ['required','numeric']
-        }
-      },
-    };
   
     const submitForm = (e) => {
       e.preventDefault();
       const { ticket_activity_log, saveTicketActivityLogOption } = this.props;
       const validation = new Validator(
         ticket_activity_log, 
-        validationRules,
+        activityLogValidationRules,
         customValidationMessages
       );
 
