@@ -10,7 +10,7 @@ import TicketForm from '../views/Tickets/TicketForm';
 import api from '../helpers/api';
 import { addTickets, pushToTickets, removeFromTickets, refreshTickets } from '../data/tickets/actions';
 import { saveTicketOption, addTicket, updateTicket} from '../data/ticket/actions';
-import { customValidationMessages } from '../helpers/auth';
+import { customValidationMessages, ticketValidationRules } from '../helpers/auth';
 
 class Tickets extends React.Component {
   componentDidMount() {
@@ -139,25 +139,13 @@ class Tickets extends React.Component {
 
   render() {
     const { tickets, ticket, user } = this.props;
-    
-    const validationRules = {
-      data: {
-        attributes: {
-          title: 'required',
-          ticket_no: 'required',
-          project_id: 'required',
-          start_date: 'required',
-          maximum_permitted_time: 'numeric'
-        }
-      },
-    };
-  
+
     const submitForm = (e) => {
       e.preventDefault();
       const { ticket, saveTicketOption } = this.props;
       const validation = new Validator(
         ticket, 
-        validationRules,
+        ticketValidationRules,
         customValidationMessages
       );
 

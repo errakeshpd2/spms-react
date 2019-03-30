@@ -1,0 +1,3 @@
+export const ADD_STATISTICS = 'ADD_STATISTICS';
+
+

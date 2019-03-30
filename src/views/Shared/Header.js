@@ -42,6 +42,13 @@ class Header extends Component {
                   </Menu.Menu>
                 </>
               )}
+              { isEmpty(user) && (
+                <Menu.Menu position="right">
+                  <Menu.Item>
+                    <Link to={APP_PATH.LOGIN}>Login</Link>
+                  </Menu.Item>
+                </Menu.Menu>
+              )}
             </Container>
           </Menu>
       </div>

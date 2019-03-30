@@ -44,7 +44,7 @@ class TicketActivityLogForm extends Component {
         closeOnEscape={false}
         closeOnRootNodeClick={false}
       >
-        <Modal.Header inverted style={{ color: 'white', background: 'teal'}}>
+        <Modal.Header inverted style={{ color: 'white', background: '#00b5ad'}}>
           {!ticket_activity_log.id && 'Create New Activity'}
           {ticket_activity_log.id && 'Edit Activity'}
         </Modal.Header>
@@ -103,7 +103,7 @@ class TicketActivityLogForm extends Component {
             </Form>
           </Modal.Description>
         </Modal.Content>
-        <Modal.Actions style={{ color: 'white', background: 'teal'}}>
+        <Modal.Actions style={{ color: 'white', background: '#00b5ad'}}>
           <Button color="green" onClick={submitForm}>
             <Icon name="checkmark" /> Save
           </Button>

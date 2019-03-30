@@ -1,10 +1,24 @@
 import React from 'react';
-import { Table, Header } from 'semantic-ui-react';
+import { Table, Header, Pagination } from 'semantic-ui-react';
 
 import ListRow from './ListRow';
 
 class TicketActivityList extends React.Component {
+  state = {
+    activePage: 5,
+    boundaryRange: 1,
+    totalPages: 5,
+  }
+
+  handlePaginationChange = (e, { activePage }) => this.setState({ activePage })
+
   render() {
+    const {
+      activePage,
+      boundaryRange,
+      totalPages,
+    } = this.state
+
     const {ticket_activity_logs, actionSelectionHandler} = this.props;
     const listRow = ListRow(actionSelectionHandler);
 
@@ -33,6 +47,12 @@ class TicketActivityList extends React.Component {
           striped
           singleLine
         />
+        <Pagination
+          activePage={activePage}
+          boundaryRange={boundaryRange}
+          onPageChange={this.handlePaginationChange}
+          totalPages={totalPages}
+          />
       </div>
     );
   }

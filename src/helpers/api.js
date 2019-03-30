@@ -1,5 +1,6 @@
 import axios from 'axios';
 import localStore from 'store';
+import { isEmpty } from 'loadsh';
 import { startSpinner, stopSpinner } from '../data/spinner/actions';
 import store from '../store';
 
@@ -14,6 +15,9 @@ axios.defaults.headers.common = {'Authorization': `bearer ${token}`}
 axios.interceptors.request.use(
   config => {
     dispatch(startSpinner());
+    if(isEmpty(token)){
+      config.headers.common = {'Authorization': `bearer ${localStore.get('jwt')}`}
+    }
     return config;
   },
   error => {
